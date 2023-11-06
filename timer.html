@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="timer.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    var countdown;
+    var timer;
+
+    $(document).ready(function(){
+      // This part runs after the document is fully loaded.
+
+      // When the "Start" button is clicked:
+      $("#startButton").click(function(){
+        var minutes = parseInt($("#timeInput").val());
+
+        if (!isNaN(minutes) && minutes > 0) {
+          // Convert minutes to seconds for the countdown.
+          countdown = minutes * 60;
+          updateDisplay();
+          $("#timeInput").prop("disabled", true);
+          $("#startButton").prop("disabled", true);
+          $("#stopButton").prop("disabled", false);
+
+          // Create an interval to decrement the countdown.
+          timer = setInterval(function(){
+            countdown--;
+            updateDisplay();
+            if (countdown === 0) {
+              clearInterval(timer);
+              $("#startButton").prop("disabled", false);
+              $("#stopButton").prop("disabled", true);
+            }
+          }, 1000);
+        }
+      });
+
+      // When the "Stop" button is clicked:
+      $("#stopButton").click(function(){
+        clearInterval(timer);
+        $("#timeInput").prop("disabled", false);
+        $("#startButton").prop("disabled", false);
+        $("#stopButton").prop("disabled", true);
+      });
+
+      // When the "Reset" button is clicked:
+      $("#resetButton").click(function(){
+        clearInterval(timer);
+        $("#timeInput").prop("disabled", false);
+        $("#startButton").prop("disabled", false);
+        $("#stopButton").prop("disabled", true);
+        $("#timeDisplay").text("");
+      });
+
+      // Update the display with the remaining time.
+      function updateDisplay() {
+        var minutes = Math.floor(countdown / 60);
+        var seconds = countdown % 60;
+        $("#timeDisplay").text(minutes + "m " + seconds + "s");
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="timer-container">
+    <h1 class="timer-heading">Countdown Timer</h1>
+    <input type="number" id="timeInput" class="timer-input" placeholder="Set time in minutes">
+    <button id="startButton" class="timer-button">Start</button>
+    <button id="stopButton" class="timer-button" disabled>Stop</button>
+    <button id="resetButton" class="timer-button" disabled>Reset</button>
+    <div id="timeDisplay" class="timer-display"></div>
+  </div>
+</body>
+</html>

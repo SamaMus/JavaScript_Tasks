@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+button {
+    font-size: 18px;
+    margin: 20px;
+}
+
+#dice-container {
+    display: none;
+    font-size: 36px;
+}
+
+#result {
+    font-size: 24px;
+}
+
+#continue-button {
+    font-size: 18px;
+    margin: 20px;
+}
