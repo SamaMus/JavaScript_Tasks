@@ -9,12 +9,14 @@
 
     $(document).ready(function(){
       $("#startButton").click(function(){
-        var minutes = parseInt($("#timeInput").val());
+        var hours = parseInt($("#hoursInput").val()) || 0; 
+        var minutes = parseInt($("#minutesInput").val()) || 0;
+        var seconds = parseInt($("#secondsInput").val()) || 0;
 
-        if (!isNaN(minutes) && minutes > 0) {
-          countdown = minutes * 60;
+        if (hours > 0 || minutes > 0 || seconds > 0) {
+          countdown = (hours * 3600) + (minutes * 60) + seconds;
           updateDisplay();
-          $("#timeInput").prop("disabled", true);
+          $("#hoursInput, #minutesInput, #secondsInput").prop("disabled", true);
           $("#startButton").prop("disabled", true);
           $("#stopButton").prop("disabled", false);
           $("#resetButton").prop("disabled", true);
@@ -34,7 +36,7 @@
 
       $("#stopButton").click(function(){
         clearInterval(timer);
-        $("#timeInput").prop("disabled", false);
+        $("#hoursInput, #minutesInput, #secondsInput").prop("disabled", false);
         $("#startButton").prop("disabled", false);
         $("#stopButton").prop("disabled", true);
         $("#resetButton").prop("disabled", false);
@@ -42,20 +44,22 @@
 
       $("#resetButton").click(function(){
         clearInterval(timer);
-        $("#timeInput").prop("disabled", false);
+        $("#hoursInput, #minutesInput, #secondsInput").prop("disabled", false);
         $("#startButton").prop("disabled", false);
         $("#stopButton").prop("disabled", true);
         $("#resetButton").prop("disabled", true);
-        $("#timeDisplay").text("0m 0s");
-        $("#timeInput").val("");
+        $("#timeDisplay").text("0h 0m 0s");
+        $("#hoursInput").val("");
+        $("#minutesInput").val("");
+        $("#secondsInput").val("");
         countdown = 0;
       });
 
       function updateDisplay() {
-        var minutes = Math.floor(countdown / 60);
+        var hours = Math.floor(countdown / 3600);
+        var minutes = Math.floor((countdown % 3600) / 60);
         var seconds = countdown % 60;
-        $("#minutesBox").text(minutes);
-        $("#secondsBox").text(seconds);
+        $("#timeDisplay").text(hours + "h " + minutes + "m " + seconds + "s");
       }
     });
   </script>
@@ -63,15 +67,15 @@
 <body>
   <div class="timer-container">
     <h1 class="timer-heading">Countdown Timer</h1>
-    <input type="number" id="timeInput" class="timer-input" placeholder="Set time in minutes">
+    <div class="timer-input-container">
+      <input type="number" id="hoursInput" class="timer-input" placeholder="Hours">
+      <input type="number" id="minutesInput" class="timer-input" placeholder="Minutes">
+      <input type="number" id="secondsInput" class="timer-input" placeholder="Seconds">
+    </div>
     <button id="startButton" class="timer-button">Start</button>
     <button id="stopButton" class="timer-button" disabled>Stop</button>
     <button id="resetButton" class="timer-button" disabled>Reset</button>
-    <div id="timeDisplay" class="timer-display">
-      <div class="timer-box" id="minutesBox">0</div>
-      <div class="timer-colon">:</div>
-      <div class="timer-box" id="secondsBox">0</div>
-    </div>
+    <div id="timeDisplay" class="timer-display">0h 0m 0s</div>
   </div>
 </body>
 </html>

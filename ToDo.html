@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="ToDo.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      $("#addButton").click(function(){
-        var task = $("#taskInput").val();
-        if (task !== "") {
-          $("#taskList").append("<li>" + task + "<span class='remove'>Remove</span></li>");
-          $("#taskInput").val("");
-        }
-      });
-
-      $("#taskList").on("click", "li", function(){
-        $(this).toggleClass("crossed");
-      });
-
-      // $("#taskList").on("click", ".remove", function(){
-      //   $(this).parent().remove();
-      // });
-    });
-  </script>
-  <style>
- .crossed { 
-      text-decoration: line-through;
-    }
-  </style>
+  <!-- <script src="app.js"></script> -->
 </head>
 <body>
-  <h1>Todo List</h1>
-  <input type="text" id="taskInput" placeholder="Add a new task">
-  <button id="addButton">Add</button>
-  <ul id="taskList">
-  </ul>
+  <div class="todo-container">
+    <h1 class="todo-heading">ToDo List</h1>
+    <input type="text" id="taskInput" class="todo-input" placeholder="Add a new task">
+    <button id="addButton" class="todo-button">Add</button>
+    <ul id="taskList" class="todo-list">
+    </ul>
+  </div> 
+  <script>
+$(document).ready(function(){
+  $("#addButton").click(function(){
+    var task = $("#taskInput").val();
+    if (task.trim() !== "") {
+      var listItem = $("<li class='todo-item'></li>");
+      listItem.append("<span>" + task + "</span>");
+      listItem.append("<button class='removeButton'>Remove</button>");
+      listItem.append("<button class='crossOutButton'>Cross Out</button>");
+      $("#taskList").append(listItem);
+      $("#taskInput").val(""); // Clear the input field
+    }
+  });
+
+  $("#taskList").on("click", ".removeButton", function(){
+    $(this).closest("li").remove();
+  });
+
+  $("#taskList").on("click", ".crossOutButton", function(){
+    $(this).closest("li").find("span").toggleClass("completed");
+  });
+
+  $("#taskList").on("click", "span", function(){
+    $(this).toggleClass("completed");
+  });
+});
+
+  </script>
 </body>
 </html>
