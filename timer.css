@@ -1,53 +1,75 @@
 /* styles.css */
 body {
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 .timer-container {
-    text-align: center;
-    background-color: #007bff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
 .timer-heading {
-    font-size: 24px;
-    color: #fff;
-    margin-top: 0;
-}
-
-.timer-input {
-    width: 200px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  font-size: 24px;
+  margin: 0 0 20px;
 }
 
 .timer-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #fff;
-    color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 }
 
-.timer-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.timer-input {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
 }
 
 .timer-display {
-    font-size: 36px;
-    color: #fff;
-    margin: 20px;
+  font-size: 36px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-box {
+  background-color: #007bff;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 24px;
+  border-radius: 5px;
+  margin: 0 5px;
+  padding: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add box shadow for a stylish look */
+}
+
+.timer-colon {
+  font-size: 36px;
+  color: #007bff;
 }

@@ -8,21 +8,17 @@
     var timer;
 
     $(document).ready(function(){
-      // This part runs after the document is fully loaded.
-
-      // When the "Start" button is clicked:
       $("#startButton").click(function(){
         var minutes = parseInt($("#timeInput").val());
 
         if (!isNaN(minutes) && minutes > 0) {
-          // Convert minutes to seconds for the countdown.
           countdown = minutes * 60;
           updateDisplay();
           $("#timeInput").prop("disabled", true);
           $("#startButton").prop("disabled", true);
           $("#stopButton").prop("disabled", false);
+          $("#resetButton").prop("disabled", true);
 
-          // Create an interval to decrement the countdown.
           timer = setInterval(function(){
             countdown--;
             updateDisplay();
@@ -30,33 +26,36 @@
               clearInterval(timer);
               $("#startButton").prop("disabled", false);
               $("#stopButton").prop("disabled", true);
+              $("#resetButton").prop("disabled", false);
             }
           }, 1000);
         }
       });
 
-      // When the "Stop" button is clicked:
       $("#stopButton").click(function(){
         clearInterval(timer);
         $("#timeInput").prop("disabled", false);
         $("#startButton").prop("disabled", false);
         $("#stopButton").prop("disabled", true);
+        $("#resetButton").prop("disabled", false);
       });
 
-      // When the "Reset" button is clicked:
       $("#resetButton").click(function(){
         clearInterval(timer);
         $("#timeInput").prop("disabled", false);
         $("#startButton").prop("disabled", false);
         $("#stopButton").prop("disabled", true);
-        $("#timeDisplay").text("");
+        $("#resetButton").prop("disabled", true);
+        $("#timeDisplay").text("0m 0s");
+        $("#timeInput").val("");
+        countdown = 0;
       });
 
-      // Update the display with the remaining time.
       function updateDisplay() {
         var minutes = Math.floor(countdown / 60);
         var seconds = countdown % 60;
-        $("#timeDisplay").text(minutes + "m " + seconds + "s");
+        $("#minutesBox").text(minutes);
+        $("#secondsBox").text(seconds);
       }
     });
   </script>
@@ -68,7 +67,11 @@
     <button id="startButton" class="timer-button">Start</button>
     <button id="stopButton" class="timer-button" disabled>Stop</button>
     <button id="resetButton" class="timer-button" disabled>Reset</button>
-    <div id="timeDisplay" class="timer-display"></div>
+    <div id="timeDisplay" class="timer-display">
+      <div class="timer-box" id="minutesBox">0</div>
+      <div class="timer-colon">:</div>
+      <div class="timer-box" id="secondsBox">0</div>
+    </div>
   </div>
 </body>
 </html>
