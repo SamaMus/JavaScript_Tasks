@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#addButton").click(function(){
+        var task = $("#taskInput").val();
+        if (task !== "") {
+          $("#taskList").append("<li>" + task + "<span class='remove'>Remove</span></li>");
+          $("#taskInput").val("");
+        }
+      });
+
+      $("#taskList").on("click", "li", function(){
+        $(this).toggleClass("crossed");
+      });
+
+      // $("#taskList").on("click", ".remove", function(){
+      //   $(this).parent().remove();
+      // });
+    });
+  </script>
+  <style>
+ .crossed { 
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <input type="text" id="taskInput" placeholder="Add a new task">
+  <button id="addButton">Add</button>
+  <ul id="taskList">
+  </ul>
+</body>
+</html>
