@@ -1,0 +1,79 @@
+ul,
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+}
+
+ul li,
+ol li {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, font-size 0.2s;
+}
+
+ul li:nth-child(odd),
+ol li:nth-child(odd) {
+    font-weight: bold;
+}
+
+ul li:nth-child(even),
+ol li:nth-child(even) {
+    font-style: italic;
+}
+
+ul li:hover,
+ol li:hover {
+    transform: scale(1.05);
+    background-color: #f0f0f0;
+}
+
+ul li.strikethrough,
+ol li.strikethrough {
+    text-decoration: line-through;
+}
+
+.popup-menu {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-menu div {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.popup-menu div:hover {
+    background-color: #f0f0f0;
+}
+
+.add-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}

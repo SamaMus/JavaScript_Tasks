@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="Books.css">
+</head>
+<body>
+<h2>Drinks</h2>
+<ul id="drinkList">
+</ul>
+<button class="add-button" onclick="addDrink()">Add Drink</button>
+
+<h2>Action Plan</h2>
+<ol id="actionPlan">
+</ol>
+<button class="add-button" onclick="addActionItem()">Add Action Item</button>
+
+<h2>My Favorite Books</h2>
+<ul id="favoriteBooks">
+</ul>
+<button class="add-button" onclick="addFavoriteBook()">Add Book</button>
+
+<script>
+  function addDrink() {
+    const drinkList = document.getElementById("drinkList");
+    const newDrink = prompt("Enter a new drink:");
+    if (newDrink) {
+      const li = document.createElement("li");
+      li.textContent = newDrink;
+      li.onclick = toggleStrikethrough;
+      drinkList.appendChild(li);
+    }
+  }
+
+  function addActionItem() {
+    const actionPlan = document.getElementById("actionPlan");
+    const newItem = prompt("Enter a new action item:");
+    if (newItem) {
+      const li = document.createElement("li");
+      li.textContent = newItem;
+      li.onclick = toggleStrikethrough;
+      actionPlan.appendChild(li);
+    }
+  }
+
+  function addFavoriteBook() {
+    const favoriteBooks = document.getElementById("favoriteBooks");
+    const newBook = prompt("Enter a new book:");
+    if (newBook) {
+      const li = document.createElement("li");
+      li.textContent = newBook;
+      li.ondblclick = showPopupMenu;
+      favoriteBooks.appendChild(li);
+    }
+  }
+
+  function toggleStrikethrough() {
+    this.classList.toggle("strikethrough");
+  }
+
+  function showPopupMenu(e) {
+    if (e.button === 0 && e.detail === 2) {
+      const popupMenu = document.createElement("div");
+      popupMenu.classList.add("popup-menu");
+      popupMenu.innerHTML = `
+        <div onclick="removeItem(this.parentElement.parentElement)">Remove</div>
+        <div onclick="toggleStrikethrough(this.parentElement.parentElement)">Strikethrough</div>
+      `;
+      popupMenu.style.position = "absolute";
+      popupMenu.style.left = e.clientX + "px";
+      popupMenu.style.top = e.clientY + "px";
+      document.body.appendChild(popupMenu);
+
+      // Dismiss the popup menu when clicking outside
+      document.addEventListener("click", function closePopupMenu(event) {
+        if (event.target !== popupMenu) {
+          document.removeEventListener("click", closePopupMenu);
+          popupMenu.remove();
+        }
+      });
+    }
+  }
+
+  function removeItem(item) {
+    item.remove();
+  }
+</script>
+</body>
+</html>

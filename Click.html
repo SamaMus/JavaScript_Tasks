@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="click.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var firstParagraphVisible = true;
+            
+            $(".toggle-button").click(function() {
+                // Toggle the visibility of the first paragraph
+                if (firstParagraphVisible) {
+                    $(".first-paragraph").fadeOut(500); // Hide the first paragraph with a fade-out effect
+                } else {
+                    $(".first-paragraph").fadeIn(500); // Show the first paragraph with a fade-in effect
+                }
+                
+                firstParagraphVisible = !firstParagraphVisible; // Toggle the flag
+
+                // Change the button text
+                if (firstParagraphVisible) {
+                    $(this).text("Click me!"); // Text when the first paragraph is visible
+                } else {
+                    $(this).text("Click again!"); // Text when the first paragraph is hidden
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <p class="first-paragraph">This is the first paragraph.</p>
+    <p class="second-paragraph">This is the second paragraph.</p>
+    <button class="toggle-button">Click me!</button>
+</body>
+</html>

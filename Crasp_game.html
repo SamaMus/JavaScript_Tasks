@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game of Craps</title>
+    <style>
+        #dice {
+            font-size: 48px;
+        }
+
+        #message {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        #continueButton {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game of Craps</h1>
+    <div id="dice"></div>
+    <div id="message"></div>
+    <button id="startButton">Start Round</button>
+    <button id="continueButton">Continue?</button>
+
+    <script>
+        const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+        let point = 0; // Track the point
+
+        function rollDice() {
+            const die1 = Math.floor(Math.random() * 6);
+            const die2 = Math.floor(Math.random() * 6);
+            return [die1, die2];
+        }
+
+        function sumDice(dice) {
+            return dice[0] + dice[1] + 2; // Adding 2 because dice values are 0 to 5
+        }
+
+        function displayMessage(message) {
+            document.getElementById('message').textContent = message;
+        }
+
+        document.getElementById('startButton').addEventListener('click', () => {
+            const dice = rollDice();
+            const total = sumDice(dice);
+            document.getElementById('dice').textContent = `${diceFaces[dice[0]]} ${diceFaces[dice[1]]}`;
+
+            if (point === 0) {
+                // First roll
+                if (total === 7 || total === 11) {
+                    displayMessage('You Win!');
+                } else if (total === 2 || total === 3 || total === 12) {
+                    displayMessage(total + ' ' + 'You Lose!');
+                } else {
+                    point = total; // Set the point
+                    displayMessage(total + ' ' + 'Roll Again');
+                    document.getElementById('continueButton').style.display = 'block';
+                }
+            } else {
+                // Subsequent rolls with a point established
+                if (total === point) {
+                    displayMessage(total + ' ' + 'You Win! Point rolled again.');
+                    point = 0; // Reset the point
+                } else if (total === 7) {
+                    displayMessage(total + ' ' + 'You Lose! Seven out.');
+                    point = 0; // Reset the point
+                } else {
+                    displayMessage(total + ' ' + 'Roll Again');
+                }
+            }
+
+            document.getElementById('startButton').disabled = true;
+        });
+
+        document.getElementById('continueButton').addEventListener('click', () => {
+            const dice = rollDice();
+            const total = sumDice(dice);
+            document.getElementById('dice').textContent = `${diceFaces[dice[0]]} ${diceFaces[dice[1]]}`;
+
+            if (point === 0) {
+                if (total === 7 || total === 11) {
+                    displayMessage(total + ' ' + 'You Win!');
+                } else if (total === 2 || total === 3 || total === 12) {
+                    displayMessage(total + ' ' + 'You Lose!');
+                } else {
+                    point = total;
+                    displayMessage(total + ' ' + 'Roll Again');
+                }
+            } else {
+                if (total === point) {
+                    displayMessage(total + ' ' + 'You Win! Point rolled again.');
+                    point = 0;
+                } else if (total === 7) {
+                    displayMessage(total + ' ' + 'You Lose! Seven out.');
+                    point = 0;
+                } else {
+                    displayMessage(total + ' ' + 'Roll Again');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
