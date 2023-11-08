@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sieve of Eratosthenes</title>
+    <style>
+        /* Add some basic CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prime Numbers using Sieve of Eratosthenes</h1>
+    <p>Enter a number to find all prime numbers up to that limit:</p>
+    <input type="number" id="limit" placeholder="Enter a limit">
+    <button onclick="findPrimes()">Find Primes</button>
+    <div id="output"></div>
+
+    <script>
+        function findPrimes() {
+            const limit = parseInt(document.getElementById("limit").value);
+
+            if (isNaN(limit) || limit <= 1) {
+                alert("Please enter a valid number greater than 1.");
+                return;
+            }
+
+            const primes = new Array(limit + 1).fill(true);
+
+            for (let p = 2; p * p <= limit; p++) {
+                if (primes[p]) {
+                    for (let i = p * p; i <= limit; i += p) {
+                        primes[i] = false;
+                    }
+                }
+            }
+
+            displayPrimes(primes);
+        }
+
+        function displayPrimes(primes) {
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "<p>Prime numbers up to the limit:</p>";
+
+            for (let i = 2; i < primes.length; i++) {
+                if (primes[i]) {
+                    outputDiv.innerHTML += i + ", ";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
