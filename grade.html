@@ -27,37 +27,37 @@
         <p id="result"></p>
     </div>
     <script>
-        // function checkGrade() {
-        //     var fullName = document.getElementById("fullName").value;
-        //     var grade = parseFloat(document.getElementById("grade").value);
+        function checkGrade() {
+            var fullName = document.getElementById("fullName").value;
+            var grade = parseFloat(document.getElementById("grade").value);
 
-        //     if (fullName === "" || isNaN(grade) || grade < 0 || grade > 100) {
-        //         document.getElementById("result").innerHTML = "Invalid input. Please enter a valid full name and grade.";
-        //         return;
-        //     }
+            if (fullName === "" || isNaN(grade) || grade < 0 || grade > 100) {
+                document.getElementById("result").innerHTML = "Invalid input. Please enter a valid full name and grade.";
+                return;
+            }
 
-        //     var resultMessage = "Hello, " + fullName + "!";
-        //     if (grade >= 60) {
-        //         resultMessage += " Congratulations! You passed the course with a grade of " + getLetterGrade(grade) + ".";
-        //     } else {
-        //         resultMessage += " Try again, you have failed the course.";
-        //     }
-        //     document.getElementById("result").innerHTML = resultMessage;
-        // }
+            var resultMessage = "Hello, " + fullName + "!";
+            if (grade >= 60) {
+                resultMessage += " Congratulations! You passed the course with a grade of " + getLetterGrade(grade) + ".";
+            } else {
+                resultMessage += " Try again, you have failed the course.";
+            }
+            document.getElementById("result").innerHTML = resultMessage;
+        }
 
-        // function getLetterGrade(grade) {
-        //     if (grade >= 90) {
-        //         return "A";
-        //     } else if (grade >= 80) {
-        //         return "B";
-        //     } else if (grade >= 70) {
-        //         return "C";
-        //     } else if (grade >= 60) {
-        //         return "D";
-        //     } else {
-        //         return "F";
-        //     }
-        // }
+        function getLetterGrade(grade) {
+            if (grade >= 90) {
+                return "A";
+            } else if (grade >= 80) {
+                return "B";
+            } else if (grade >= 70) {
+                return "C";
+            } else if (grade >= 60) {
+                return "D";
+            } else {
+                return "F";
+            }
+        }
     //Person Constructor
       
 function Person(firstName, lastName, dateOfBirth) {

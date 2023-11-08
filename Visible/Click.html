@@ -8,20 +8,19 @@
             var firstParagraphVisible = true;
             
             $(".toggle-button").click(function() {
-                // Toggle the visibility of the first paragraph
+               
                 if (firstParagraphVisible) {
-                    $(".first-paragraph").fadeOut(500); // Hide the first paragraph with a fade-out effect
+                    $(".first-paragraph").fadeOut(500); 
                 } else {
-                    $(".first-paragraph").fadeIn(500); // Show the first paragraph with a fade-in effect
+                    $(".first-paragraph").fadeIn(500); 
                 }
                 
-                firstParagraphVisible = !firstParagraphVisible; // Toggle the flag
+                firstParagraphVisible = !firstParagraphVisible; 
 
-                // Change the button text
                 if (firstParagraphVisible) {
-                    $(this).text("Click me!"); // Text when the first paragraph is visible
+                    $(this).text("Click me!"); // 
                 } else {
-                    $(this).text("Click again!"); // Text when the first paragraph is hidden
+                    $(this).text("Click again!"); // 
                 }
             });
         });
